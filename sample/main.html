@@ -6,32 +6,64 @@
   <title>カレンダー</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Arial', sans-serif;
       text-align: center;
-      padding: 20px;
+      padding: 40px;
+      background-color: #f9f9f9;
     }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
     table {
       border-collapse: collapse;
-      margin: auto;
+      margin: 30px auto;
+      width: 90%;
+      max-width: 800px;
+      font-size: 24px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
     th, td {
       border: 1px solid #ccc;
-      width: 40px;
-      height: 40px;
+      width: 100px;
+      height: 80px;
       text-align: center;
+      vertical-align: middle;
     }
+
     th {
-      background-color: #f2f2f2;
+      background-color: #e6e6e6;
     }
+
     .today {
-      background-color: #ffdddd;
+      background-color: #ffbbbb;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <h1 id="monthYear"></h1>
-  <button onclick="changeMonth(-1)">前の月</button>
-  <button onclick="changeMonth(1)">次の月</button>
+  <button onclick="changeMonth(-1)">← 前の月</button>
+  <button onclick="changeMonth(1)">次の月 →</button>
+
   <table id="calendar">
     <thead>
       <tr>
@@ -44,12 +76,12 @@
   <script>
     let today = new Date();
     let currentYear = today.getFullYear();
-    let currentMonth = today.getMonth(); // 0-11
+    let currentMonth = today.getMonth();
 
     function renderCalendar(year, month) {
       const monthYear = document.getElementById("monthYear");
       const calendarBody = document.getElementById("calendar-body");
-      calendarBody.innerHTML = ""; // クリア
+      calendarBody.innerHTML = "";
 
       const firstDay = new Date(year, month, 1).getDay();
       const lastDate = new Date(year, month + 1, 0).getDate();
